@@ -5,64 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 
-    <header>
-        <h1>Weather App ☀️</h1>
-        <p>La météo de votre ville</p>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#0B1120] p-5 font-sans text-white">
+
+    <!-- Header -->
+    <header class="mb-8 text-center">
+        <h1 class="mb-2 text-3xl font-bold text-[#38BDF8]">
+            Weather App ☀️
+        </h1>
+
+        <p class="text-gray-300">
+            La météo de votre ville
+        </p>
     </header>
 
-    <main>
+    <main class="mx-auto max-w-[600px]">
 
         <!-- Recherche -->
-        <form class="search" id="search-form">
-            <input id="search-input" type="text" placeholder="Entrez une ville...">
-            <button type="submit">Rechercher</button>
+        <form id="search-form" class="mb-6 flex flex-col gap-3">
+
+            <label for="search-input" class="font-medium">
+                Ville recherchée :
+            </label>
+            <input id="search-input"type="text"placeholder="Entrez une ville..."class="w-full rounded-lg border-2  px-3 py-3 text-black outline-none focus:border-sky-400">
+            <span id="error-text"class="hidden w-full rounded-md border border-red-500 bg-white p-2 text-red-500"></span>
+            <p id="loading" class="hidden text-sky-400">
+                Chargement...
+            </p>
+            <button type="submit"class="rounded-lg bg-[#38BDF8] p-3 font-semibold text-[#0B1120] transition hover:bg-sky-400">
+                Rechercher
+            </button>
+
         </form>
 
         <!-- Météo actuelle -->
-        <section class="weather-card">
-            <h2>Nador, Maroc</h2>
-            <span class="icon">☀️</span>
-            <h3>24°C</h3>
-            <p>Ensoleillé</p>
+        <section class="mb-6 rounded-2xl bg-[#151F32] p-6 text-center">
 
-            <div class="details">
+            <h2 class="mb-4 text-xl font-semibold">
+                Nador, Maroc
+            </h2>
+
+            <span class="text-5xl">☀️</span>
+
+            <h3 class="my-3 text-5xl font-bold text-[#38BDF8]">
+                24°C
+            </h3>
+
+            <p class="text-gray-300">
+                Ensoleillé
+            </p>
+
+            <div class="mt-5 flex justify-around gap-4 text-sm text-[#94A3B8]">
                 <p>Humidité : 65%</p>
                 <p>Vent : 14 km/h</p>
             </div>
+
         </section>
 
         <!-- Prévisions -->
-        <section class="forecast">
-            <h2>Prévisions</h2>
+        <section>
 
-            <div class="days">
+            <h2 class="mb-4 text-xl font-bold">
+                Prévisions
+            </h2>
 
-                <article class="day">
+            <div class="flex flex-col gap-3 sm:flex-row">
+
+                <article class="flex-1 rounded-xl bg-[#151F32] p-5 text-center">
                     <h3>Lundi</h3>
-                    <span>☀️</span>
+                    <span class="my-3 block text-3xl">☀️</span>
                     <p>25°C</p>
                 </article>
 
-                <article class="day">
+                <article class="flex-1 rounded-xl bg-[#151F32] p-5 text-center">
                     <h3>Mardi</h3>
-                    <span>🌤️</span>
+                    <span class="my-3 block text-3xl">🌤️</span>
                     <p>22°C</p>
                 </article>
 
-                <article class="day">
+                <article class="flex-1 rounded-xl bg-[#151F32] p-5 text-center">
                     <h3>Mercredi</h3>
-                    <span>🌧️</span>
+                    <span class="my-3 block text-3xl">🌧️</span>
                     <p>19°C</p>
                 </article>
 
             </div>
+
         </section>
 
     </main>
+
+    <script type="module" src="./js/main.js"></script>
 
 </body>
 </html>
