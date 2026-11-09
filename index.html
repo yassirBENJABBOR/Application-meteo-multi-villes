@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Weather App ☀️</h1>
+        <p>La météo de votre ville</p>
+    </header>
+
+    <main>
+
+        <!-- Recherche -->
+        <form class="search" id="search-form">
+            <input id="search-input" type="text" placeholder="Entrez une ville...">
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <!-- Météo actuelle -->
+        <section class="weather-card">
+            <h2>Nador, Maroc</h2>
+            <span class="icon">☀️</span>
+            <h3>24°C</h3>
+            <p>Ensoleillé</p>
+
+            <div class="details">
+                <p>Humidité : 65%</p>
+                <p>Vent : 14 km/h</p>
+            </div>
+        </section>
+
+        <!-- Prévisions -->
+        <section class="forecast">
+            <h2>Prévisions</h2>
+
+            <div class="days">
+
+                <article class="day">
+                    <h3>Lundi</h3>
+                    <span>☀️</span>
+                    <p>25°C</p>
+                </article>
+
+                <article class="day">
+                    <h3>Mardi</h3>
+                    <span>🌤️</span>
+                    <p>22°C</p>
+                </article>
+
+                <article class="day">
+                    <h3>Mercredi</h3>
+                    <span>🌧️</span>
+                    <p>19°C</p>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
