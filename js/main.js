@@ -13,6 +13,8 @@ const temperature = document.querySelector("#temperature")
 const weatherDes = document.querySelector("#weatherDes")
 const Humidite =document.querySelector("#Humidite")
 const Vent =document.querySelector("#Vent")
+const errorprevision = document.querySelector("#error-prevision")
+
 
 searchForm.addEventListener("submit",function(event){
 
@@ -65,6 +67,77 @@ searchForm.addEventListener("submit",function(event){
     .finally(function(){
         loading.classList.add("hidden")
     })
+
+    const prevision =document.querySelector("#prevision-card")
+    const Previsionurl = `https://api.openweathermap.org/data/2.5/forecast?q=${ville}&appid=${API_KEY}&units=metric&lang=fr`;
+
+    fetch(Previsionurl)
+    .then(function(response){
+        if(!response.ok){
+            throw new Error("Erreur du chargement de prevision");
+        }
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data.list)
+        const previsionsFiltres = data.list.filter(function(previs){
+            return previs.dt_txt.includes("12:00:00")
+            
+        })
+        errorprevision.classList.add("hidden")
+
+        prevision.textContent = "";
+        previsionsFiltres.forEach(function(previs) {
+
+            prevision.classList.remove("hidden")
+
+            const previscarte = document.createElement("article")
+            previscarte.className =" flex-1 rounded-xl bg-[#151F32] p-5 text-center"
+            const day = document.createElement("h1")
+            previscarte.appendChild(day)
+
+            const icone = document.createElement("span")
+            icone.className ="my-3 block text-3xl"
+            previscarte.appendChild(icone)
+
+            const descriptionPrevi =document.createElement("p")
+            descriptionPrevi.className ="text-gray-300"
+            previscarte.appendChild(descriptionPrevi)
+
+            const temp = document.createElement("p")
+            temp.className ="my-3 text-2xl font-bold text-[#38BDF8]"
+            previscarte.appendChild(temp)
+
+
+            prevision.append(previscarte)
+
+            const date = new Date(previs.dt_txt);
+            day.textContent = date.toLocaleString("fr-FR", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            });
+
+            temp.textContent =`${previs.main.temp} °C`
+            const previsId = previs.weather[0].id;
+            const previsic = WEATHER_CODES[previsId]
+            icone.textContent =`${previsic.icon}`
+
+            descriptionPrevi.textContent =`${previs.weather[0].description}`
+            
+        });
+    })
+    .catch(function(error){
+        console.error(error)
+        errorprevision.textContent=error.message
+        errorprevision.classList.remove("hidden")
+        prevision.classList.add("hidden")
+    })
+    .finally(function(){
+        // prevision.classList.add("hidden")
+    })
+
 
 })
 
