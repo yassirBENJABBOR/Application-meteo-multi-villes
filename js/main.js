@@ -108,6 +108,13 @@ searchForm.addEventListener("submit",function(event){
             temp.className ="my-3 text-2xl font-bold text-[#38BDF8]"
             previscarte.appendChild(temp)
 
+            const tempmaxmin =document.createElement("div")
+            tempmaxmin.className ="mt-5 flex justify-around gap-3 text-gray-300 text-sm"
+            const maxtemp =document.createElement("p")
+            const mintemp =document.createElement("p")
+            tempmaxmin.appendChild(maxtemp)
+            tempmaxmin.appendChild(mintemp)
+            previscarte.appendChild(tempmaxmin)
 
             prevision.append(previscarte)
 
@@ -125,6 +132,8 @@ searchForm.addEventListener("submit",function(event){
             icone.textContent =`${previsic.icon}`
 
             descriptionPrevi.textContent =`${previs.weather[0].description}`
+            mintemp.textContent=`temp min : ${previs.main.temp_min}°C`
+            maxtemp.textContent=`temp max : ${previs.main.temp_max}°C`
             
         });
     })
