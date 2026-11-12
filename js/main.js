@@ -36,8 +36,20 @@ searchForm.addEventListener("submit",function(event){
     fetch(url)
     .then(function(response){
         console.log(response.ok)
-        if (!response.ok) {
+        if (response.status === 404) {
             throw new Error("Ville introuvable");
+        }
+        if(response.status === 401){
+            throw new Error("Cle API invalide");
+        }
+        if (response.status === 429){
+            throw new Error("Trop de quota, resseyer plus tard")
+        }
+        if (response.status === 500){
+            throw new Error("Service meteo indisponible")
+        }
+         if (!response.ok) {
+            throw new Error("Erreur du chargement de weather ");
         }
         return response.json()
     })
@@ -59,8 +71,12 @@ searchForm.addEventListener("submit",function(event){
     })
     .catch(function(error){
         console.error(error)
-        errortext.textContent = error.message;
-        errortext.classList.remove("hidden");
+        if (error instanceof TypeError) {
+            errortext.textContent = "Verifiez votre connexion Internet";
+        } else {
+            errortext.textContent = error.message;
+        } 
+       errortext.classList.remove("hidden");
         weathercard.classList.add("hidden")
 
     })
@@ -73,6 +89,18 @@ searchForm.addEventListener("submit",function(event){
 
     fetch(Previsionurl)
     .then(function(response){
+        if (response.status === 404) {
+            throw new Error("Ville introuvable");
+        }
+        if(response.status === 401){
+            throw new Error("Cle API invalide");
+        }
+        if (response.status === 429){
+            throw new Error("Trop de quota, resseyer plus tard")
+        }
+        if (response.status === 500){
+            throw new Error("Service meteo indisponible")
+        }
         if(!response.ok){
             throw new Error("Erreur du chargement de prevision");
         }
@@ -139,7 +167,11 @@ searchForm.addEventListener("submit",function(event){
     })
     .catch(function(error){
         console.error(error)
-        errorprevision.textContent=error.message
+        if (error instanceof TypeError) {
+            errorprevision.textContent = "Verifiez votre connexion Internet";
+        } else {
+            errorprevision.textContent=error.message
+        } 
         errorprevision.classList.remove("hidden")
         prevision.classList.add("hidden")
     })
@@ -147,6 +179,8 @@ searchForm.addEventListener("submit",function(event){
         // prevision.classList.add("hidden")
     })
 
+
+    
 
 })
 
