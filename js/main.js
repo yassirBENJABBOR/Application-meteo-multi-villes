@@ -55,6 +55,7 @@ searchForm.addEventListener("submit",function(event){
     })
     .then(function(data){
         console.log(data)
+        resseyerbtn.classList.add("hidden");
         afficheville.textContent =`${data.name}, ${data.sys.country}`
         temperature.textContent = `${data.main.temp} °C`
         weatherDes.textContent =`${data.weather[0].description}`
@@ -76,6 +77,7 @@ searchForm.addEventListener("submit",function(event){
         } else {
             errortext.textContent = error.message;
         } 
+        resseyerbtn.classList.remove("hidden");
        errortext.classList.remove("hidden");
         weathercard.classList.add("hidden")
 
@@ -183,5 +185,20 @@ searchForm.addEventListener("submit",function(event){
     
 
 })
+
+
+const resseyerbtn = document.createElement("button")
+resseyerbtn.textContent="Ressayer"
+resseyerbtn.className = "hidden rounded-lg bg-red-800 p-3 font-bold text-white transition hover:bg-sky-400"
+searchForm.append(resseyerbtn)  
+
+const ville = searchInput.value.trim()
+    derniereVille = ville;
+
+resseyerbtn.addEventListener("click", function() {
+    searchInput.value = derniereVille;
+    searchForm.requestSubmit();
+    // resseyerbtn.classList.add("hidden");
+});
 
 
