@@ -169,13 +169,15 @@ searchForm.addEventListener("submit",function(event){
     })
     .catch(function(error){
         console.error(error)
+        prevision.replaceChildren();
+        prevision.classList.add("hidden")
+
         if (error instanceof TypeError) {
             errorprevision.textContent = "Verifiez votre connexion Internet";
         } else {
             errorprevision.textContent=error.message
         } 
         errorprevision.classList.remove("hidden")
-        prevision.classList.add("hidden")
     })
     .finally(function(){
         // prevision.classList.add("hidden")
